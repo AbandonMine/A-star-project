@@ -164,3 +164,23 @@ void czy_zapisac_tabele(node * tab)
         plik.close();
     }
 }
+
+void drop_list(Telement *& head)
+{
+    Telement * tmp;
+    while(head != NULL)
+    {
+        tmp = head;
+        head = head->next;
+        delete tmp;
+    }
+}
+
+void funkcje_zapisu(node * Q, char map[][N])
+{
+
+    pisanie_tabeli(Q);
+    if(czy(2))
+        save_to_file(map);
+    czy_zapisac_tabele(Q);
+}

@@ -14,27 +14,26 @@ using namespace std;
 int main()
 {
     srand(time(0));
-    char map[N][N]  =
+    char map[N][N]  /*=
     {
         '@', '@', '@', '@', '@', '@', '@', '@', '@', '@',
+        '@', '.', '@', '.', '@', '.', '.', '@', '.', '@',
+        '@', '.', '@', '.', '@', '.', '.', '@', '.', '@',
+        '@', '.', '@', '.', '@', '@', '.', '@', '.', '@',
         '@', '.', '@', '.', '.', '.', '.', '@', '.', '@',
         '@', '.', '.', '.', '.', '.', '.', '@', '.', '@',
-        '@', '.', '.', '.', '.', '.', '.', '@', '.', '@',
-        '@', '.', '.', '.', '.', '.', '.', '@', '.', '@',
-        '@', '.', '.', '.', '.', '.', '.', '@', '.', '@',
-        '@', '.', '.', '.', '.', '.', '.', '@', '.', '@',
+        '@', '.', '@', '.', '.', '.', '.', '@', '.', '@',
         '@', '.', '@', '@', '@', '@', '@', '@', '.', '@',
         '@', '.', '.', '.', '.', '.', '.', '.', '.', '@',
         '@', '@', '@', '@', '@', '@', '@', '@', '@', '@',
-    }
+    }*/
         ;
 
     int xstart, ystart, xcelu, ycelu;
-    clock_t czas_trwania_alogrytmu;
-    node * tab = NULL;
+
 
     //te funkcje zostana wyrzucone po wprowadzeniu wczytywania mapy i GUI
-    //create_2d(map);
+    create_2d(map);
     write_2d(map);
     do
     {
@@ -58,15 +57,9 @@ int main()
     write_2d(map);
     //koniec
 
-    czas_trwania_alogrytmu = clock();
-    tab = algorytm_a_gwiazdka(xstart, ystart, xcelu, ycelu, map);
-    czas_trwania_alogrytmu = clock() - czas_trwania_alogrytmu;
-    write_2d(map);
-    cout << "Algorytm pracowal przez: " << (float(czas_trwania_alogrytmu))/CLOCKS_PER_SEC << " s."  << endl;
-    pisanie_tabeli(tab);
-    if(czy(2))
-        save_to_file(map);
-    czy_zapisac_tabele(tab);
+
+    algorytm_a_gwiazdka(xstart, ystart, xcelu, ycelu, map);
+
     getchar();
     return 0;
 }
