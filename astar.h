@@ -43,5 +43,5 @@ bool czy_zakazane(char map[][N], int x, int y);
 void zamien_rodzica(Telement * glowa, int x, int y, node* gdzie);
 void pokoloruj_droge(node *Q, char map[][N]);
 void usun_z_otwartej(Telement *& glowa, node * co);
-node * algorytm_a_gwiazdka(int xstart, int ystart, int xcelu, int ycelu, char map[][N]);
+void algorytm_a_gwiazdka(int xstart, int ystart, int xcelu, int ycelu, char map[][N]);
 #endif // ASTAR_H

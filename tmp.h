@@ -15,4 +15,8 @@ void wypisz_t(node * tab, int licznik);
 
 void save_to_file(char map[][N]);
 void czy_zapisac_tabele(node * tab);
+void funkcje_zapisu(node * Q, char map[][N]);
+
+void drop_list(Telement *& head);
+
 #endif // TMP_H

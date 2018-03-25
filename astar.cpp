@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <cstdlib>
+#include <ctime>
 #include "astar.h"
 #include "tmp.h"
 #include "stale.h"
@@ -197,7 +198,7 @@ void  pokoloruj_droge(node *Q, char map[][N])
 }
 
 
-node * algorytm_a_gwiazdka(int xstart, int ystart, int xcelu, int ycelu, char map[][N])
+void algorytm_a_gwiazdka(int xstart, int ystart, int xcelu, int ycelu, char map[][N])
 {
 
     Telement * otwarta_glowa = NULL;
@@ -218,13 +219,14 @@ node * algorytm_a_gwiazdka(int xstart, int ystart, int xcelu, int ycelu, char ma
     float stary_g;
 
     bool zaznaczanie = czy(0);
+    clock_t czas_trwania_alogrytmu = clock();
 
     otwarta_glowa = new Telement;
     otwarta_glowa->pole = new node(xstart, ystart, 0, 0, 0, NULL);
     if(otwarta_glowa->pole->czy_cel(xcelu, ycelu))
     {
         cout << "Punkt startowy i końcowy zanjduja sie w tym samym miejscu!" << endl;
-        return NULL;
+        return;
     }
     otwarta_glowa->pole->policz_h(xcelu, ycelu);
     otwarta_glowa->pole->policz_f();
@@ -238,7 +240,17 @@ node * algorytm_a_gwiazdka(int xstart, int ystart, int xcelu, int ycelu, char ma
         if(Q->czy_cel(xcelu, ycelu))
         {
             pokoloruj_droge(Q, map);
-            return Q;
+
+            czas_trwania_alogrytmu = clock() - czas_trwania_alogrytmu;
+            write_2d(map);
+            cout << "Algorytm pracowal przez: " << (float(czas_trwania_alogrytmu))/CLOCKS_PER_SEC << " s."  << endl;
+
+            funkcje_zapisu(Q, map);
+
+            drop_list(otwarta_glowa);
+            drop_list(zamknieta_glowa);
+
+            return;
         }
 
         for(int i = 0; i < 8; i++)
@@ -273,5 +285,13 @@ node * algorytm_a_gwiazdka(int xstart, int ystart, int xcelu, int ycelu, char ma
 
     }
    cout << "Nie znaleziono polaczenia!" << endl;
-   return NULL;
+   czas_trwania_alogrytmu = clock() - czas_trwania_alogrytmu;
+   write_2d(map);
+   cout << "Algorytm pracowal przez: " << (float(czas_trwania_alogrytmu))/CLOCKS_PER_SEC << " s."  << endl;
+   Q = NULL;
+
+   funkcje_zapisu(Q, map);
+   drop_list(otwarta_glowa);
+   drop_list(zamknieta_glowa);
+   return;
 }
